@@ -15,3 +15,11 @@ RUN cp /opt/build/halide/bin/halide_library_runtime.generator_binary /usr/local/
 
 RUN cp -r /opt/build/halide/include /usr/include/halide
 RUN cp /opt/build/halide/lib/libHalide.so /usr/lib
+
+RUN mkdir /work
+RUN mkdir /build
+RUN mkdir /halide
+WORKDIR /build
+
+ADD entrypoint.py /opt/
+ENTRYPOINT ["python", "/opt/entrypoint.py"]
