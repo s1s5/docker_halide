@@ -17,12 +17,16 @@ def main(args):
 
     output = ''
     if args[0] == 'runtime':
-        output = subprocess.check_output(
-            ['/opt/build/halide/bin/halide_library_runtime.generator_binary',
-             '-r', 'halide_runtime', '-o', '/tmp/', 'target={}'.format(args[1]),
-             '-e', 'static_library'])
-        with open('/tmp/halide_runtime.a', 'rb') as fp:
-            sys.stdout.write(fp.read())
+        if args[1] == 'header':
+            with open('/usr/include/halide/HalideRuntime.h', 'rb') as fp:
+                sys.stdout.write(fp.read())
+        else:
+            output = subprocess.check_output(
+                ['/opt/build/halide/bin/halide_library_runtime.generator_binary',
+                 '-r', 'halide_runtime', '-o', '/tmp/', 'target={}'.format(args[1]),
+                 '-e', 'static_library'])
+            with open('/tmp/halide_runtime.a', 'rb') as fp:
+                sys.stdout.write(fp.read())
     else:
         if os.path.isabs(args[1]):
             raise Exception("source file path must be relative to /work")

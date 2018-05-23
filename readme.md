@@ -7,7 +7,14 @@ $ docker pull --disable-content-trust s1s5/halide
 ```
 
 ### runtimeライブラリの出力
-`$ docker run -i --rm s1s5/halide runtime x86-64 > /tmp/halide_runtime.a`
+
+``` shell
+#### ヘッダファイルの出力
+$ docker run -i --rm s1s5/halide runtime header > /tmp/halide_runtime.h
+
+#### ライブラリの出力
+$ docker run -i --rm s1s5/halide runtime x86-64 > /tmp/halide_runtime.a
+```
 
 x86-64のところには`target`が入る（後述）
 
